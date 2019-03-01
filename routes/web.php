@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes(['verify'=> true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+Route::get('login/google', 'Auth\LoginController@redirectToProvider')->name('google_login');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
